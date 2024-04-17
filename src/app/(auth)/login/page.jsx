@@ -15,16 +15,16 @@ const Login = () => {
 
   return (
     <>
-      <div className="">
-        <form onSubmit={handleLogin} className="max-w-sm mx-auto shadow-xl p-3">
-          <h1 className='font-bold italic text-center text-4xl pb-8'>Login</h1>
+      <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+        <form onSubmit={handleLogin} className="max-w-sm mx-auto shadow-xl p-4 bg-white rounded-lg">
+          <h1 className='font-bold italic text-center text-4xl pb-3 mb-5  bg-black'>Login</h1>
           <div className="mb-5">
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-            <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@gmail.com" required onChange={(e) => setUser({ ...user, email: e.target.value })} />
+            <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@gmail.com" required onChange={(e) => setUser({ ...user, email: e.target.value })} />
           </div>
           <div className="mb-5">
             <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-            <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required onChange={(e) => setUser({ ...user, password: e.target.value })} />
+            <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required onChange={(e) => setUser({ ...user, password: e.target.value })} />
           </div>
 
           <div className="flex items-start mb-5">
