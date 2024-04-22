@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import Link from 'next/link';
+import axios from 'axios';
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -9,11 +10,23 @@ const Register = () => {
     password: "",
   });
 
+  let url = "Api/user/register"
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const {id, value}= e.target
+
+    setUser((prevUser)=>({
+      ...prevUser,
+      [id]:value,
+    }))
     console.log(user);
   };
-
+  
+ const submit=()=>{
+  console.log(user);
+  axios.post(url, user)
+ }
   return (
     <>
     <div className="bg-green-100 min-h-screen flex items-center justify-center">
@@ -21,15 +34,15 @@ const Register = () => {
         <h1 className='font-bold italic text-center mb-5 text-4xl pb-3 bg-black'>Register</h1>
         <div className="mb-5">
           <label htmlFor="fullname" className="block mb-2 text-sm font-medium text-gray-900 ">Full Name</label>
-          <input type="text" value={user.fullname} id="fullname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="John Smith" required onChange={(e) => setUser({ ...user, fullname: e.target.value })} />
+          <input type="text" value={user.fullname} id="fullname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="John Smith" required onChange={(handleSubmit)} />
         </div>
         <div className="mb-5">
           <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-          <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@gmail.com" required onChange={(e) => setUser({ ...user, email: e.target.value })} />
+          <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@gmail.com" required onChange={(handleSubmit)} />
         </div>
         <div className="mb-5">
           <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-          <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required onChange={(e) => setUser({ ...user, password: e.target.value })} />
+          <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required onChange={(handleSubmit)} />
         </div>
   
         <div className="flex items-start mb-5">

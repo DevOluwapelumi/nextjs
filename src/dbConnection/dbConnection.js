@@ -1,10 +1,10 @@
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 export const dbConnection = async () => {
 
     try {
-        Mongoose.connect(process.env.MONGO_URI)
-        const connection = Mongoose.connection
+        mongoose.connect(process.env.MONGO_URI)
+        const connection = mongoose.connection
 
         connection.on('connected', () => {
             console.log('Connected to database');
