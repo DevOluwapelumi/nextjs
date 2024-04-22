@@ -27,6 +27,7 @@ const Register = () => {
   console.log(user);
   axios.post(url, user)
  }
+ 
   return (
     <>
     <div className="bg-green-100 min-h-screen flex items-center justify-center">
