@@ -17,7 +17,7 @@ export async function POST(NextRequest) {
             return NextResponse.json({ error: "User already exists" }, { status: 400 });
         }
 
-        const newUser = new User({ firstName, lastName, email, password }); // Note: I removed lastName as it was not defined
+        const newUser = new User({ firstName, lastName, email, password });
         const savedUser = await newUser.save();
         console.log(savedUser);
 
