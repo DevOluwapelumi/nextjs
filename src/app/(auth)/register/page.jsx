@@ -5,45 +5,55 @@ import axios from 'axios';
 
 const Register = () => {
   const [user, setUser] = useState({
-    fullname: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
   });
 
-  let url = "Api/user/register"
+  const url = "Api/user/register";
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setUser((prevUser) => ({
+      ...prevUser,
+      [id]: value,
+    }));
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const {id, value}= e.target
-
-    setUser((prevUser)=>({
-      ...prevUser,
-      [id]:value,
-    }))
     console.log(user);
+    axios.post(url, user)
+      .then(response => {
+        console.log(response.data); // Log response data if needed
+        // Handle successful registration here
+      })
+      .catch(error => {
+        console.error('Error during registration:', error);
+        // Handle registration error here
+      });
   };
-  
- const submit=()=>{
-  console.log(user);
-  axios.post(url, user)
- }
  
   return (
-    <>
     <div className="bg-green-100 min-h-screen flex items-center justify-center">
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto shadow-xl p-12 bg-white rounded-lg">
         <h1 className='font-bold italic text-center mb-5 text-4xl pb-3 bg-black'>Register</h1>
         <div className="mb-5">
-          <label htmlFor="fullname" className="block mb-2 text-sm font-medium text-gray-900 ">Full Name</label>
-          <input type="text" value={user.fullname} id="fullname" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="John Smith" required onChange={(handleSubmit)} />
+          <label htmlFor="firstName" className="block mb-2 text-sm font-medium text-gray-900">First Name</label>
+          <input type="text" value={user.firstName} id="firstName" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="John" required onChange={handleChange} />
         </div>
         <div className="mb-5">
-          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 ">Email</label>
-          <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@gmail.com" required onChange={(handleSubmit)} />
+          <label htmlFor="lastName" className="block mb-2 text-sm font-medium text-gray-900">Last Name</label>
+          <input type="text" value={user.lastName} id="lastName" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="Smith" required onChange={handleChange} />
+        </div>
+        <div className="mb-5">
+          <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Email</label>
+          <input type="email" id="email" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" placeholder="name@gmail.com" required onChange={handleChange} />
         </div>
         <div className="mb-5">
           <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
-          <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required onChange={(handleSubmit)} />
+          <input type="password" id="password" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required onChange={handleChange} />
         </div>
   
         <div className="flex items-start mb-5">
@@ -56,8 +66,6 @@ const Register = () => {
         <p className="text-center mt-2">Already have an account? <Link href="/login" className="text-blue-600 hover:underline">Login Here</Link></p>
       </form>
     </div>
-  </>
-  
   );
 };
 

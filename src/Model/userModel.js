@@ -19,6 +19,8 @@ const userSchema = mongoose.Schema({
     },
 });
 
+
+
 // Check if the model has already been defined to prevent overwriting
 const User = mongoose.models.User || mongoose.model("User", userSchema);
 
